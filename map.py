@@ -1,37 +1,27 @@
-class map():
-    s = [[0,0,1,0],
-        [0,1,1,0],
-        [0,1,0,0],
-        [0,1,0,0]]
-    
-    map = []
+from vec2d import Vec2d
 
-    n = 0
-    for Row in s:
+class Map():
+    map = [ [1,1,0,1],
+            [1,0,0,1],
+            [1,0,1,1],
+            [1,0,1,1]]
+    
+    def __init__(self) -> None:
+        self.x = map#[]
+        self.spawn = Vec2d(2,0)
         
-        Columnnum = 0
-        num = 0
-        for Column in Row:
-            
-            if num == 1:
-                num = num + (2^Columnnum)
-            
-            Columnnum = Columnnum + 1
-        map.append(num)
-        n = n + 1
-    print(map)
 
     def __repr__(self) -> str:
         ss=""
-        for row in self.s:
+        for row in self.map:
             for col in row:
                 if col:
-                    ss = ss + " "
-                else:
                     ss = ss + "#"
+                else:
+                    ss = ss + " "
                 
             ss = ss + "\n"
         return ss
-a = map()
-print(a)
-print(3&1)
+    
+    def load_map_from_file(self,mapfile):
+        self.map = mapfile
