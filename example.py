@@ -15,9 +15,9 @@ class MazeGame:
         self.canvas.pack()
 
         self.images = {
-            0: ImageTk.PhotoImage(Image.open("//Amazon2/sean.ogdenprice$/Downloads/MicrosoftTeams-image.png").resize((self.cell_size, self.cell_size))),
-            1: ImageTk.PhotoImage(Image.open("//Amazon2/sean.ogdenprice$/Downloads/MicrosoftTeams-image (1).png").resize((self.cell_size, self.cell_size))),
-            "agent": ImageTk.PhotoImage(Image.open("//Amazon2/sean.ogdenprice$/Downloads/MicrosoftTeams-image (2).png").resize((self.cell_size, self.cell_size)))
+            0: ImageTk.PhotoImage(Image.open("O:\\programming\\vscode\\csi-project\\13csi-project-SeanOPHagley\\default-floor.png").resize((self.cell_size, self.cell_size))),
+            1: ImageTk.PhotoImage(Image.open("O:\\programming\\vscode\\csi-project\\13csi-project-SeanOPHagley\\default-wall.png").resize((self.cell_size, self.cell_size))),
+            "agent": ImageTk.PhotoImage(Image.open("O:\\programming\\vscode\\csi-project\\13csi-project-SeanOPHagley\\default-floor.png").resize((self.cell_size, self.cell_size)))
         }
 
         self.draw_maze()

@@ -3,21 +3,25 @@ from PIL import Image, ImageTk
 
 from map import Map
 from vec2d import Vec2d
+from player import Player
 
 class Game:
     def __init__(self) -> None:
 
         # Defaults
         self.Map = Map()
-        self.xLen = len(Map.x)
-        self.yLen = len(Map.x[0])
-        self.Tile_size_x = 10
-        self.Tile_size_y = 10
-        self.Wall_texture = Image.open("default-wall.png").resize((self.Tile_size_x,self.Tile_size_y))
-        self.Floor_texture = Image.open("default-floor.png").resize((self.Tile_size_x,self.Tile_size_y))
+        self.yLen = self.Map.size.y
+        self.xLen = self.Map.size.x
+        self.Tile_size_x = 50
+        self.Tile_size_y = 50
         self.root = tk.Tk()
-        self.canvas = tk.Canvas(self.root, width=100, height=100)
+        self.canvas = tk.Canvas(self.root, width=640, height=480)
         self.canvas.pack()
+        self.Wall_texture = ImageTk.PhotoImage(Image.open("O:\\programming\\vscode\\csi-project\\13csi-project-SeanOPHagley\\default-wall.png").resize((self.Tile_size_x,self.Tile_size_y)))
+        self.Floor_texture = ImageTk.PhotoImage(Image.open("O:\\programming\\vscode\\csi-project\\13csi-project-SeanOPHagley\\default-floor.png").resize((self.Tile_size_x,self.Tile_size_y)))
+        self.Player_texture = ImageTk.PhotoImage(Image.open("O:\\programming\\vscode\\csi-project\\13csi-project-SeanOPHagley\\default-floor.png").resize((self.Tile_size_x,self.Tile_size_y)))
+        self.Player = Player()
+
 
     def set_tile_size(self,size):
 
@@ -35,10 +39,22 @@ class Game:
             self.Tile_size_y = size
         else:
             raise TypeError("Game.set_tile_size() only accepts Vec2d, int or float")
+        self.Wall_texture = ImageTk.PhotoImage(Image.open("O:\\programming\\vscode\\csi-project\\13csi-project-SeanOPHagley\\default-wall.png").resize((self.Tile_size_x,self.Tile_size_y)))
+        self.Floor_texture = ImageTk.PhotoImage(Image.open("O:\\programming\\vscode\\csi-project\\13csi-project-SeanOPHagley\\default-floor.png").resize((self.Tile_size_x,self.Tile_size_y)))
         
         # Resize textures to match tile size
-        self.Wall_texture.resize(self.Tile_size_x,self.Tile_size_y)
-        self.Floor_texture.resize(self.Tile_size_x,self.Tile_size_y)
+        #self.Wall_texture.resize([self.Tile_size_x,self.Tile_size_y])
+        #self.Floor_texture.resize([self.Tile_size_x,self.Tile_size_y])
+
+    def setPlayerPos(self,pos):
+        if not isinstance(pos,Vec2d):
+            raise TypeError("setPlayerPos() only accepts Vec2d as argument.")
+        self.Player.position = pos
+        
+    def setImagePos(self,pos):
+        if not isinstance(pos,Vec2d):
+            raise TypeError("setImagePos() only accepts Vec2d as argument.")
+        
 
     def load_map(self,mapfile):
         self.map = Map()
@@ -49,12 +65,13 @@ class Game:
     def render(self):
         self.canvas.delete()
 
-        for iX in range(self.xLen):
-            for iY in range(self.yLen):
+        for iX in range(self.Map.size.x):
+            for iY in range(self.Map.size.y):
                 image = self.Floor_texture
-                if iY:
+                if self.Map.mapdata[iY][iX]:
                     image = self.Wall_texture
-                self.canvas.create_image(iX * self.Tile_size_x, iY * self.Tile_size_y,self.Wall_texture)
+
+                self.canvas.create_image(iX * self.Tile_size_x + self.Tile_size_x/2, iY * self.Tile_size_y + self.Tile_size_y/2, image=image)
         
             
 
