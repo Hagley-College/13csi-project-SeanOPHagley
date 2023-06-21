@@ -1,13 +1,20 @@
-import tkinter as tk
-from PIL import Image, ImageTk
-from game import Game
+import json
+from map import Map
+j = {
+    "tile_size": 32,
+    "texture_paths": ["\\assets\\textures\\default-floor.png","\\assets\\textures\\default-wall.png"],
+    "player": {"x": 1, "y":0, "texture": 0},
+    "map": [
+            [{"texture": 1, "collisions": True},{"texture": 0, "collisions": False},{"texture": 1, "collisions": True},{"texture": 1, "collisions": True}],
+            [{"texture": 1, "collisions": True},{"texture": 0, "collisions": False},{"texture": 0, "collisions": False},{"texture": 1, "collisions": True}],
+            [{"texture": 1, "collisions": True},{"texture": 1, "collisions": True},{"texture": 0, "collisions": False},{"texture": 1, "collisions": True}],
+            [{"texture": 1, "collisions": True},{"texture": 0, "collisions": False},{"texture": 0, "collisions": False},{"texture": 1, "collisions": True}]
+            
+            ]
+}
 
-gameobj = Game()
-  
-gameobj.set_tile_size(32)
 
-gameobj.render()
-gameobj.root.mainloop()
-
-
-# C:\WPy64-3870\python-3.8.7.amd64\python.exe5
+f = open(".\\maps\\default\\map.json","w")
+f.write(json.dumps(j, indent=4))
+f.close()
+m = Map("default")

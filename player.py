@@ -4,12 +4,17 @@ from vec2d import Vec2d
 class Player():
     
 
-    def __init__(self,pos):
+    def __init__(self,pos,texture):
         if pos == None:
             pos = Vec2d(0,0)
         elif not isinstance(pos,Vec2d):
-            raise TypeError("Player() only accepts Vec2d")
+            raise TypeError("Player() argument 1 only accepts Vec2d")
+        if texture == None:
+            texture = 0
+        elif not isinstance(texture,int):
+            raise TypeError("Player() argument 2 only accepts int")
         self.position = pos
+        self.texture = texture
 
 
     # Direction 1 is for right, -1 for left, 2 for up, -2 for down
@@ -31,5 +36,5 @@ class Player():
         self.position.y = pos
 
     def __repr__(self):
-        return f"x:{self.x}, y:{self.y}"
+        return f"x:{self.position.x}, y:{self.position.y}, texture:{self.texture}"
     

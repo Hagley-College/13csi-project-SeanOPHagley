@@ -1,0 +1,86 @@
+{
+    "tile_size": 32,
+    "texture_paths": [
+        ".\\assets\\textures\\default-floor.png",
+        ".\\assets\\textures\\default-wall.png"
+    ],
+    "player": {
+        "x": 1,
+        "y": 0,
+        "texture": 0
+    },
+    "map": [
+        [
+            {
+                "texture": 1,
+                "collisions": true
+            },
+            {
+                "texture": 0,
+                "collisions": false
+            },
+            {
+                "texture": 1,
+                "collisions": true
+            },
+            {
+                "texture": 1,
+                "collisions": true
+            }
+        ],
+        [
+            {
+                "texture": 1,
+                "collisions": true
+            },
+            {
+                "texture": 0,
+                "collisions": false
+            },
+            {
+                "texture": 0,
+                "collisions": false
+            },
+            {
+                "texture": 1,
+                "collisions": true
+            }
+        ],
+        [
+            {
+                "texture": 1,
+                "collisions": true
+            },
+            {
+                "texture": 1,
+                "collisions": true
+            },
+            {
+                "texture": 0,
+                "collisions": false
+            },
+            {
+                "texture": 1,
+                "collisions": true
+            }
+        ],
+        [
+            {
+                "texture": 1,
+                "collisions": true
+            },
+            {
+                "texture": 0,
+                "collisions": false
+            },
+            {
+                "texture": 0,
+                "collisions": false
+            },
+            {
+                "texture": 1,
+                "collisions": true
+            }
+        ]
+    ]
+}

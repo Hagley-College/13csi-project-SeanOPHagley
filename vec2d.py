@@ -3,7 +3,7 @@ class Vec2d:
         # Check correct types
         if not (isinstance(x,int) or isinstance(x,float)):
             raise TypeError("vec2d.x must be a number")
-        elif not (isinstance(y,int) or isinstance(y,float)):
+        if not (isinstance(y,int) or isinstance(y,float)):
             raise TypeError("vec2d.y must be a number")
         self.x = x
         self.y = y
