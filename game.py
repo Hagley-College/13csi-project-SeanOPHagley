@@ -17,10 +17,10 @@ class Game:
         self.root = tk.Tk()
         self.canvas = tk.Canvas(self.root, width=640, height=480)
         self.canvas.pack()
-        self.Wall_texture = ImageTk.PhotoImage(Image.open("O:\\programming\\vscode\\csi-project\\13csi-project-SeanOPHagley\\default-wall.png").resize((self.Tile_size_x,self.Tile_size_y)))
-        self.Floor_texture = ImageTk.PhotoImage(Image.open("O:\\programming\\vscode\\csi-project\\13csi-project-SeanOPHagley\\default-floor.png").resize((self.Tile_size_x,self.Tile_size_y)))
-        self.Player_texture = ImageTk.PhotoImage(Image.open("O:\\programming\\vscode\\csi-project\\13csi-project-SeanOPHagley\\default-floor.png").resize((self.Tile_size_x,self.Tile_size_y)))
-        self.Player = Player()
+        self.Wall_texture = Image.open(".\\assets\\textures\\default-wall.png").resize((self.Tile_size_x,self.Tile_size_y))
+        self.Floor_texture = Image.open(".\\assets\\textures\\default-floor.png").resize((self.Tile_size_x,self.Tile_size_y))
+        self.Player_texture = Image.open(".\\assets\\textures\\default-floor.png").resize((self.Tile_size_x,self.Tile_size_y))
+        #self.Player = Player()
 
 
     def set_tile_size(self,size):
@@ -39,8 +39,8 @@ class Game:
             self.Tile_size_y = size
         else:
             raise TypeError("Game.set_tile_size() only accepts Vec2d, int or float")
-        self.Wall_texture = ImageTk.PhotoImage(Image.open("O:\\programming\\vscode\\csi-project\\13csi-project-SeanOPHagley\\default-wall.png").resize((self.Tile_size_x,self.Tile_size_y)))
-        self.Floor_texture = ImageTk.PhotoImage(Image.open("O:\\programming\\vscode\\csi-project\\13csi-project-SeanOPHagley\\default-floor.png").resize((self.Tile_size_x,self.Tile_size_y)))
+        self.Wall_texture.resize((self.Tile_size_x,self.Tile_size_y))
+        self.Floor_texture.resize((self.Tile_size_x,self.Tile_size_y))
         
         # Resize textures to match tile size
         #self.Wall_texture.resize([self.Tile_size_x,self.Tile_size_y])
@@ -67,9 +67,9 @@ class Game:
 
         for iX in range(self.Map.size.x):
             for iY in range(self.Map.size.y):
-                image = self.Floor_texture
+                image = ImageTk.PhotoImage(self.Floor_texture)
                 if self.Map.mapdata[iY][iX]:
-                    image = self.Wall_texture
+                    image = ImageTk.PhotoImage(self.Wall_texture)
 
                 self.canvas.create_image(iX * self.Tile_size_x + self.Tile_size_x/2, iY * self.Tile_size_y + self.Tile_size_y/2, image=image)
         

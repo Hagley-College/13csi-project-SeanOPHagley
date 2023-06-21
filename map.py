@@ -1,4 +1,5 @@
 from vec2d import Vec2d
+from player import Player
 
 class Map():
     
@@ -10,7 +11,7 @@ class Map():
             [1,0,1,1]]
 
         self.size = Vec2d(len(self.mapdata[0]),len(self.mapdata))
-        self.spawn = Vec2d(2,0)
+        self.player = Player(Vec2d(2,0))
         
 
     def __repr__(self) -> str:
