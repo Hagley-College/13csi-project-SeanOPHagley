@@ -12,7 +12,7 @@ class Map():
 
         self.size = Vec2d(len(self.mapdata[0]),len(self.mapdata))
         self.player = Player(Vec2d(2,0))
-        
+         
 
     def __repr__(self) -> str:
         ss=""
