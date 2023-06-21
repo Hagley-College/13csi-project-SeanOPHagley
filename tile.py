@@ -9,10 +9,9 @@ class Tile():
             collide = False
         elif not isinstance(collide,bool):
             raise TypeError("Tile() argument 1 only accepts bools")
-        if image == None:
-            image = Image.open("O:\\programming\\vscode\\csi-project\\13csi-project-SeanOPHagley\\default-floor.png").resize((self.Tile_size_x,self.Tile_size_y))
-        elif not isinstance(image,bool):
-            raise TypeError("Tile() argument 1 only accepts bools")
+        
+        if not isinstance(image,int):
+            raise TypeError("Tile() argument 2 only accepts numbers")
         
         self.collisions = collide
         self.image = image
