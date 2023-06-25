@@ -1,8 +1,8 @@
 {
     "tile_size": 32,
     "texture_paths": [
-        ".\\assets\\textures\\default-floor.png",
-        ".\\assets\\textures\\default-wall.png"
+        "textures/default-floor.png",
+        "textures/default-wall.png"
     ],
     "player": {
         "x": 1,
