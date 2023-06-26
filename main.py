@@ -1,5 +1,5 @@
 import json
-from map import Map
+from game import Game
 # j = {
 #     "tile_size": 32,
 #     "texture_paths": ["\\assets\\textures\\default-floor.png","\\assets\\textures\\default-wall.png"],
@@ -17,4 +17,5 @@ from map import Map
 # f = open(".\\maps\\default\\map.json","w")
 # f.write(json.dumps(j, indent=4))
 # f.close()
-m = Map("default")
+m = Game()
+print(m.Map)

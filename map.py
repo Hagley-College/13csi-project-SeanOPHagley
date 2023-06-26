@@ -15,6 +15,9 @@ class Map():
 
     def __init__(self,map_name) -> None:
         
+        if map_name == "":
+            map_name = "default"
+
         map_path = os.path.normpath(os.path.join(map_folder,os.path.normpath(map_name)))
         print(map_path)
         map_file_path = os.path.join(map_path,"map.json")
@@ -25,19 +28,19 @@ class Map():
         self.tile_size = self.map_json["tile_size"]
 
 
-        map_file_json = self.map_json["map"]
+        map_json = self.map_json["map"]
         self.canvas_size = [0,0]
 
-        self.canvas_size[1] = len(map_file_json)
+        self.canvas_size[1] = len(map_json)
         self.map = []
         
-        for row in map_file_json:
+        for row in map_json:
             if len(row) > self.canvas_size[0]:
                 self.canvas_size[0] = len(row)
 
         self.map = []
         i = 0
-        for row in map_file_json:
+        for row in map_json:
             ir = 0
             self.map.append([])
             for objects in row:
@@ -69,6 +72,21 @@ class Map():
             if object[1]:
                 return True
         return False
+
+    def query_tile_textures(self,pos):
+
+        if not isinstance(pos,Vec2d):
+            raise TypeError("map.query_tile_textures only accepts vec2d")
+            re
+        
+        tile = self.map[pos.y][pos.x]
+        textures = []
+        for thing in tile:
+            textures.append(self.textures[thing[0]])
+
+        return textures
+
+    
     def set_player_pos(self,pos):
         if not isinstance(pos,Vec2d):
             raise TypeError("map.set_player_pos only accepts vec2d")
@@ -76,16 +94,20 @@ class Map():
 
     def __repr__(self) -> str:
         s = ""
+        iy = 0
         for row in self.map:
+            i = 0
             for column in row:
-                if column[0][1]:
+                if self.query_tile_collision(Vec2d(i,iy)):
                     s = s + "#"
                 else:
                     s = s + "_"
+                i+=1
             s = s+"\n"
+            iy +=1
         return s
 
 if __name__ == "__main__":
     map = Map("default")
     print(map)
-    print(map.query_tile_collision(Vec2d(1,0)))
+    print(map.query_tile_textures(Vec2d(0,0)))
