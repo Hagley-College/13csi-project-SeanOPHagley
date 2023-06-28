@@ -19,7 +19,7 @@ class Map():
             map_name = "default"
 
         map_path = os.path.normpath(os.path.join(map_folder,os.path.normpath(map_name)))
-        print(map_path)
+        #print(map_path)
         map_file_path = os.path.join(map_path,"map.json")
         map_file = open(map_file_path,"r")
         self.map_json = json.loads(map_file.read())
@@ -31,12 +31,12 @@ class Map():
         map_json = self.map_json["map"]
         self.canvas_size = [0,0]
 
-        self.canvas_size[1] = len(map_json)
+        self.canvas_size[1] = len(map_json)*self.tile_size
         self.map = []
         
         for row in map_json:
             if len(row) > self.canvas_size[0]:
-                self.canvas_size[0] = len(row)
+                self.canvas_size[0] = len(row)*self.tile_size
 
         self.map = []
         i = 0
@@ -58,8 +58,26 @@ class Map():
         texture_file_folder = os.path.join(map_path,"assets")
         i = 0
         for texture_path in self.map_json["texture_paths"]:
-            self.textures.append(Image.open(os.path.join(texture_file_folder,texture_path)).resize((self.tile_size, self.tile_size)))
+            print(os.path.normpath(os.path.join(texture_file_folder,texture_path)))
+            self.textures.append(Image.open(os.path.normpath(os.path.join(texture_file_folder,texture_path))).resize([self.tile_size,self.tile_size],Image.NEAREST))
             i += 1
+
+        self.texture_paths = []
+        i = 0
+        for texture_path in self.map_json["texture_paths"]:
+            self.texture_paths.append(os.path.normpath(os.path.join(texture_file_folder,texture_path)))
+            i += 1
+
+    def query_tile(self,pos):
+        if not isinstance(pos,Vec2d):
+            raise TypeError("map.query_tile only accepts vec2d")
+        
+        try:
+            tile = self.map[pos.y][pos.x]
+        except:
+            return None
+
+        return tile
 
     def query_tile_collision(self,pos) -> bool:
 
