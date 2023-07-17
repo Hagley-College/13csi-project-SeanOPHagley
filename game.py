@@ -18,13 +18,14 @@ class Game():
         self.Map = Map(mapname)
         self.images = []
         #self.root = tk.Tk()
+        self.canvas.delete()
         for path in self.Map.texture_paths:
             self.images.append(ImageTk.PhotoImage(Image.open(path).resize([self.Map.tile_size,self.Map.tile_size],Image.NEAREST)))
-        self.canvas = tk.Canvas(self.root, width=self.Map.canvas_size[0], height=self.Map.canvas_size[1])
+        #self.canvas = tk.Canvas(self.root, width=self.Map.canvas_size[0], height=self.Map.canvas_size[1])
         print(self.Map.canvas_size)
         self.canvas.pack()
 
-    def renderMaze(self) -> None:
+    def __renderMaze(self) -> None:
         self.canvas.delete()
         iy = 0
         for y in self.Map.map:
@@ -47,10 +48,32 @@ class Game():
                     self.canvas.create_image(x_pos, y_pos, image=image)
                 ix += 1
             iy += 1
-                
+        
+        x_pos = self.Map.player.position.x * self.Map.tile_size + self.Map.tile_size/2
+        y_pos = self.Map.player.position.y * self.Map.tile_size + self.Map.tile_size/2
+
+        self.PlayerImage = self.canvas.create_image(x_pos, y_pos, image=self.images[self.Map.player.texture])
+        
+    def update_player_image(self):
+        print("u")
+        self.canvas.moveto(self.PlayerImage,self.Map.player.position.x * self.Map.tile_size + self.Map.tile_size/2,self.Map.player.position.y * self.Map.tile_size + self.Map.tile_size/2
+)
+        
+    def up(self,e):
+        self.Map.move_player(Vec2d(0,-1))
+        self.update_player_image()
+
+    def down(self,e):
         
     def run(self):
+        self.__renderMaze()
+        self.root.bind('<Up>', self.Map.move_player(Vec2d(0,-1)))
+        self.root.bind('<Down>', self.Map.move_player(Vec2d(0,1)))
+        self.root.bind('<Left>', self.Map.move_player(Vec2d(-1,0)))
+        self.root.bind('<Right>', self.Map.move_player(Vec2d(1,0)))
         self.root.mainloop()
+        
+        
 
 if __name__ == "__main__":
     g = Game()

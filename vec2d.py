@@ -9,7 +9,7 @@ class Vec2d:
         self.y = y
     
     def __add__(self,b):
-        if not isinstance(Vec2d):
+        if not isinstance(b,Vec2d):
             raise TypeError("Vec2d.__add__ can only do arithmetic with other Vec2d classes.")
         result = Vec2d(self.x+b.x,self.y+b.y)
         return result

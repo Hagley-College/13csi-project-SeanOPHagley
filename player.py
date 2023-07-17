@@ -32,8 +32,7 @@ class Player():
         if not isinstance(pos,Vec2d):
             raise TypeError("Player.setPos() only accepts Vec2d")
         
-        self.position.x = pos
-        self.position.y = pos
+        self.position = pos
 
     def __repr__(self):
         return f"x:{self.position.x}, y:{self.position.y}, texture:{self.texture}"

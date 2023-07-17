@@ -18,4 +18,4 @@ from game import Game
 # f.write(json.dumps(j, indent=4))
 # f.close()
 m = Game()
-print(m.Map)
+m.run()

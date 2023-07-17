@@ -58,7 +58,7 @@ class Map():
         texture_file_folder = os.path.join(map_path,"assets")
         i = 0
         for texture_path in self.map_json["texture_paths"]:
-            print(os.path.normpath(os.path.join(texture_file_folder,texture_path)))
+           # print(os.path.normpath(os.path.join(texture_file_folder,texture_path)))
             self.textures.append(Image.open(os.path.normpath(os.path.join(texture_file_folder,texture_path))).resize([self.tile_size,self.tile_size],Image.NEAREST))
             i += 1
 
@@ -104,6 +104,14 @@ class Map():
 
         return textures
 
+    def move_player(self,direction):
+        if not isinstance(direction,Vec2d):
+            raise TypeError("map.move_player only accepts vec2d")
+        targetlocation = self.player.position + direction
+        if not self.query_tile_collision(targetlocation):
+            
+            self.player.setPos(targetlocation)
+        print(direction.x, " ",  direction.y)
     
     def set_player_pos(self,pos):
         if not isinstance(pos,Vec2d):
