@@ -4,7 +4,7 @@ from PIL import Image, ImageTk
 from map import Map
 from vec2d import Vec2d
 
-class Game():
+class Game:
     def __init__(self) -> None:
         self.Map = Map("")
         self.images = []
@@ -55,22 +55,43 @@ class Game():
         self.PlayerImage = self.canvas.create_image(x_pos, y_pos, image=self.images[self.Map.player.texture])
         
     def update_player_image(self):
-        print("u")
-        self.canvas.moveto(self.PlayerImage,self.Map.player.position.x * self.Map.tile_size + self.Map.tile_size/2,self.Map.player.position.y * self.Map.tile_size + self.Map.tile_size/2
+        #print("u")
+        self.canvas.moveto(self.PlayerImage,
+                         self.Map.player.position.x * self.Map.tile_size,
+                         self.Map.player.position.y * self.Map.tile_size,
 )
         
     def up(self,e):
+        print("up")
         self.Map.move_player(Vec2d(0,-1))
         self.update_player_image()
+        print(self.Map.player.position)
 
     def down(self,e):
+        print("down")
+        self.Map.move_player(Vec2d(0, 1))
+        self.update_player_image()
+        print(self.Map.player.position)
+
+    def left(self,e):
+        print("left")
+        self.Map.move_player(Vec2d(-1, 0))
+        self.update_player_image()
+        print(self.Map.player.position)
+
+    def right(self,e):
+        print("right")
+        self.Map.move_player(Vec2d(1, 0))
+        self.update_player_image()
+        print(self.Map.player.position)
+
         
     def run(self):
         self.__renderMaze()
-        self.root.bind('<Up>', self.Map.move_player(Vec2d(0,-1)))
-        self.root.bind('<Down>', self.Map.move_player(Vec2d(0,1)))
-        self.root.bind('<Left>', self.Map.move_player(Vec2d(-1,0)))
-        self.root.bind('<Right>', self.Map.move_player(Vec2d(1,0)))
+        self.root.bind('<Up>', self.up)
+        self.root.bind('<Down>', self.down)
+        self.root.bind('<Left>', self.left)
+        self.root.bind('<Right>', self.right)
         self.root.mainloop()
         
         

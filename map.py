@@ -83,8 +83,11 @@ class Map():
 
         if not isinstance(pos,Vec2d):
             raise TypeError("map.query_tile_collision only accepts vec2d")
-        
+
+        if pos.x < 0 or pos.y < 0 or pos.y >= len(self.map) or pos.x >= len(self.map[0]):
+            return True
         tile = self.map[pos.y][pos.x]
+
 
         for object in tile:
             if object[1]:
@@ -107,11 +110,11 @@ class Map():
     def move_player(self,direction):
         if not isinstance(direction,Vec2d):
             raise TypeError("map.move_player only accepts vec2d")
-        targetlocation = self.player.position + direction
+        targetlocation = Vec2d(self.player.position.x + direction.x,self.player.position.y + direction.y)
         if not self.query_tile_collision(targetlocation):
             
             self.player.setPos(targetlocation)
-        print(direction.x, " ",  direction.y)
+        #print(direction.x, " ",  direction.y)
     
     def set_player_pos(self,pos):
         if not isinstance(pos,Vec2d):
