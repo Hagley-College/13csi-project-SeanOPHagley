@@ -57,8 +57,8 @@ class Game:
     def update_player_image(self):
         #print("u")
         self.canvas.moveto(self.PlayerImage,
-                         self.Map.player.position.x * self.Map.tile_size,
-                         self.Map.player.position.y * self.Map.tile_size,
+        self.Map.player.position.x * self.Map.tile_size,
+        self.Map.player.position.y * self.Map.tile_size,
 )
         
     def up(self,e):

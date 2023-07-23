@@ -26,7 +26,7 @@ class Map():
         map_file.close()
 
         self.tile_size = self.map_json["tile_size"]
-
+        self.goal = Vec2d(self.map_json["goal"]["x"],self.map_json["goal"]["y"])
 
         map_json = self.map_json["map"]
         self.canvas_size = [0,0]

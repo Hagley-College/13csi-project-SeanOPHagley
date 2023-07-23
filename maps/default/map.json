@@ -12,6 +12,8 @@
         "y": 0,
         "texture": 4
     },
+
+    "goal": {"x":  3, "y":  3},
     "map": [
         [
             [
@@ -24,6 +26,7 @@
             ],
             [
                 {"texture": 3,
+                "collisions": true}, {"texture": 4,
                 "collisions": true}
             ],
             [
