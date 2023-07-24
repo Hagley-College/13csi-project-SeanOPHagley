@@ -1,5 +1,5 @@
 {
-    "tile_size": 32,
+    "tile_size": 48,
     "texture_paths": [
         "textures/default-floor.png",
         "textures/default-wall.png",
@@ -13,7 +13,7 @@
         "texture": 4
     },
 
-    "goal": {"x":  3, "y":  3},
+    "goal": {"x":  1, "y":  3},
     "map": [
         [
             [

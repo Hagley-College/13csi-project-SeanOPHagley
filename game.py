@@ -13,7 +13,13 @@ class Game:
             self.images.append(ImageTk.PhotoImage(Image.open(path).resize([self.Map.tile_size,self.Map.tile_size],Image.NEAREST)))
         self.canvas = tk.Canvas(self.root, width=self.Map.canvas_size[0], height=self.Map.canvas_size[1])
         self.canvas.pack()
-        
+        self.menu = tk.Menu(self.root)
+        self.helpmenu = tk.Menu(self.menu,tearoff=0)
+        self.helpmenu.add_command(label="Controls")
+        self.helpmenu.add_cascade(label="Help",menu=self.helpmenu)
+
+        self.root.config(menu=self.menu)
+
     def setMap(self,mapname) -> None:
         self.Map = Map(mapname)
         self.images = []
@@ -59,31 +65,30 @@ class Game:
         self.canvas.moveto(self.PlayerImage,
         self.Map.player.position.x * self.Map.tile_size,
         self.Map.player.position.y * self.Map.tile_size,
-)
-        
-    def up(self,e):
-        print("up")
-        self.Map.move_player(Vec2d(0,-1))
-        self.update_player_image()
-        print(self.Map.player.position)
+        )
 
-    def down(self,e):
-        print("down")
-        self.Map.move_player(Vec2d(0, 1))
+    def win(self):
+        print("win")
+        #txt = tk.Text(self.root, height=16,width =64)
+        lbl = tk.Label(self.root, text="Winner!")
+        lbl.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+    def mov(self, d):
+        self.Map.move_player(d)
         self.update_player_image()
-        print(self.Map.player.position)
+        if self.Map.player.position.x == self.Map.goal.x and self.Map.player.position.y == self.Map.goal.y:
+            self.win()
+    def up(self, e):
+        self.mov(Vec2d(0, -1))
 
-    def left(self,e):
-        print("left")
-        self.Map.move_player(Vec2d(-1, 0))
-        self.update_player_image()
-        print(self.Map.player.position)
+    def down(self, e):
+        self.mov(Vec2d(0, 1))
 
-    def right(self,e):
-        print("right")
-        self.Map.move_player(Vec2d(1, 0))
-        self.update_player_image()
-        print(self.Map.player.position)
+    def left(self, e):
+
+        self.mov(Vec2d(-1, 0))
+
+    def right(self, e):
+        self.mov(Vec2d(1, 0))
 
         
     def run(self):
