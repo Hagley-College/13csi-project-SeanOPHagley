@@ -121,6 +121,17 @@ class Map():
             raise TypeError("map.set_player_pos only accepts vec2d")
         self.player.setPos(pos)
 
+    def shortest_path_a_star(self,origin,goal):
+        open_list = [origin]
+        closed_list = []
+
+        #path = (!(origin))
+
+        while len(open_list) != 0:
+            pass
+
+
+
     def __repr__(self) -> str:
         s = ""
         iy = 0
