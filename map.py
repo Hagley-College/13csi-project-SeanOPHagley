@@ -14,9 +14,10 @@ class Map():
     
 
     def __init__(self,map_name) -> None:
-        
+        print("before: "+map_name)
         if map_name == "":
             map_name = "default"
+        print("after: " + map_name)
 
         map_path = os.path.normpath(os.path.join(map_folder,os.path.normpath(map_name)))
         #print(map_path)
@@ -38,6 +39,8 @@ class Map():
             if len(row) > self.canvas_size[0]:
                 self.canvas_size[0] = len(row)*self.tile_size
 
+        self.len = Vec2d(0, len(self.map))
+
         self.map = []
         i = 0
         for row in map_json:
@@ -48,6 +51,9 @@ class Map():
                 for object in objects:
                     self.map[i][ir].append([object["texture"],object["collisions"]])
                 ir += 1
+
+                if len(row) > self.len.x:
+                    self.len.x = len(row)
             i += 1
 
 
@@ -129,6 +135,17 @@ class Map():
 
         while len(open_list) != 0:
             pass
+
+    def shortest_path_bfs(self,startpos,goalpos):
+        flooded_map = [[-1] * self.len.x] * self.len.y
+
+        neighbour_queue = []
+
+        neighbour_queue.append(startpos)
+
+        for column in flooded_map:
+            for x in column:
+                if
 
 
 

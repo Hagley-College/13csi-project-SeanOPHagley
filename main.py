@@ -19,4 +19,5 @@ from game import Game
 # f.close()
 m = Game()
 m.setmap("badmap")
+#m.mapmenu.delete(0,"end")
 m.run()

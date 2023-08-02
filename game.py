@@ -16,10 +16,8 @@ class Game:
         self.Map = Map("")
         self.images = []
         self.root = tk.Tk()
-        self.setmap("")
-        for path in self.Map.texture_paths:
-            self.images.append(
-                ImageTk.PhotoImage(Image.open(path).resize([self.Map.tile_size, self.Map.tile_size], Image.NEAREST)))
+
+
 
         self.menu = tk.Menu(self.root)
 
@@ -37,7 +35,13 @@ class Game:
         self.helpmenu.add_command(label="Controls")
         self.menu.add_cascade(label="Help", menu=self.helpmenu)
 
-        self.refreshmaplist()
+        self.setmap("")
+
+        for path in self.Map.texture_paths:
+            self.images.append(
+                ImageTk.PhotoImage(Image.open(path).resize([self.Map.tile_size, self.Map.tile_size], Image.NEAREST)))
+
+        #self.refreshmaplist()
 
         self.root.config(menu=self.menu)
 
@@ -46,17 +50,18 @@ class Game:
         pass
 
     def refreshmaplist(self):
-        #self.mapmenu.destroy()
-        #self.mapmenu = tk.Menu(self.menu, tearoff=0)
-        #self.mapmenu.add_command(label="default", command=lambda: self.setmap(""))
-        for i in self.mapmenu.:
-            print(i)
+
+        self.mapmenu.delete(0, "end")
+
+        self.mapmenu.add_command(label="default", command=lambda: self.setmap(""))
+        self.mapmenu.add_separator()
 
         for m in os.listdir("./maps/"):
-            if m == "default":
-                continue
-            print(m)
-            self.mapmenu.add_command(label=m, command=lambda: self.setmap(m))
+            #print(m)
+            if m != "default":
+                #print("m is not default, it's " + m + "!")
+                a = m
+                self.mapmenu.add_command(label=a, command=lambda: self.setmap(a))
         #self.filemenu.add_cascade(label="Load Map", menu=self.mapmenu)
 
     def setmap(self, mapname) -> None:
@@ -64,6 +69,7 @@ class Game:
         self.images = []
         # self.root = tk.Tk()
 
+        #self.refreshmaplist()
         try:
             self.canvas.delete()
             self.canvas.config(width=self.Map.canvas_size[0], height=self.Map.canvas_size[1])
@@ -83,6 +89,7 @@ class Game:
 
         self.__rendermaze()
         self.userinput = True
+        self.refreshmaplist()
 
     def __rendermaze(self) -> None:
         self.canvas.delete()
