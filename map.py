@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from PIL import Image, ImageTk
 
 from vec2d import Vec2d
@@ -14,13 +15,10 @@ class Map():
     
 
     def __init__(self,map_name) -> None:
-        print("before: "+map_name)
         if map_name == "":
             map_name = "default"
-        print("after: " + map_name)
 
         map_path = os.path.normpath(os.path.join(map_folder,os.path.normpath(map_name)))
-        #print(map_path)
         map_file_path = os.path.join(map_path,"map.json")
         map_file = open(map_file_path,"r")
         self.map_json = json.loads(map_file.read())
@@ -64,7 +62,6 @@ class Map():
         texture_file_folder = os.path.join(map_path,"assets")
         i = 0
         for texture_path in self.map_json["texture_paths"]:
-           # print(os.path.normpath(os.path.join(texture_file_folder,texture_path)))
             self.textures.append(Image.open(os.path.normpath(os.path.join(texture_file_folder,texture_path))).resize([self.tile_size,self.tile_size],Image.NEAREST))
             i += 1
 
@@ -120,7 +117,7 @@ class Map():
         if not self.query_tile_collision(targetlocation):
             
             self.player.setPos(targetlocation)
-        #print(direction.x, " ",  direction.y)
+
     
     def set_player_pos(self,pos):
         if not isinstance(pos,Vec2d):
@@ -136,17 +133,49 @@ class Map():
         while len(open_list) != 0:
             pass
 
-    def shortest_path_bfs(self,startpos,goalpos):
+    def shortest_path_flood(self):
+        goalpos = self.goal
+        flooded_map = self.map_flood_fill(goalpos)
+
+        while self.player.position != goalpos:
+            time.sleep(1)
+            p_pos = self.player.position
+            p_value = flooded_map[p_pos.y][p_pos.x]
+            if p_value.y <= len(flooded_map) and p_value < flooded_map[p_pos.y + 1][p_pos.x]:
+                self.move_player(self,Vec2d(0,1))
+            elif p_value.y >= 0 and p_value < flooded_map[p_pos.y - 1][p_pos.x]:
+                self.move_player(self,Vec2d(0,-1))
+            elif p_value.x <= len(flooded_map[0]) and p_value < flooded_map[p_pos.y][p_pos.x + 1]:
+                self.move_player(self,Vec2d(1,0))
+            elif p_value.x >= 0 and p_value < flooded_map[p_pos.y][p_pos.x - 1]:
+                self.move_player(self,Vec2d(-1,0))
+
+
+    def map_flood_fill(self,origin):
+        print(self.len)
         flooded_map = [[-1] * self.len.x] * self.len.y
+        print(flooded_map)
+        neighbour_stack = []
 
-        neighbour_queue = []
+        neighbour_stack.append(origin)
 
-        neighbour_queue.append(startpos)
+        distance_from_origin = 0
 
-        for column in flooded_map:
-            for x in column:
-                if
+        while neighbour_stack:
+            new_neighbour_stack = []
+            for pos in neighbour_stack:
+                if not self.query_tile_collision(pos) and flooded_map[pos.y][pos.x] == -1:
+                    flooded_map[pos.y][pos.x] = distance_from_origin
 
+                    new_neighbour_stack.append(pos + Vec2d(0,1))
+                    new_neighbour_stack.append(pos + Vec2d(0, -1))
+                    new_neighbour_stack.append(pos + Vec2d(1, 0))
+                    new_neighbour_stack.append(pos + Vec2d(-1, 0))
+
+            distance_from_origin += 1
+            neighbour_stack = new_neighbour_stack
+
+        return flooded_map
 
 
     def __repr__(self) -> str:

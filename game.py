@@ -33,6 +33,7 @@ class Game:
 
         self.helpmenu = tk.Menu(self.menu, tearoff=0)
         self.helpmenu.add_command(label="Controls")
+        self.helpmenu.add_command(label="Shortest Path",command= self.Map.shortest_path_flood)
         self.menu.add_cascade(label="Help", menu=self.helpmenu)
 
         self.setmap("")
@@ -129,9 +130,6 @@ class Game:
 
     def win(self):
         print("win")
-        # txt = tk.Text(self.root, height=16,width =64)
-        # lbl = tk.Label(self.root, text="Winner!")
-        # lbl.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         self.userinput = False
         self.winlabel.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
