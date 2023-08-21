@@ -1,4 +1,5 @@
 import os
+import time
 import tkinter as tk
 from PIL import Image, ImageTk
 
@@ -10,6 +11,7 @@ class Game:
 
     def __init__(self) -> None:
 
+        self.flooded_map = None
         self.winlabel = None
         self.canvas = None
         self.userinput = False
@@ -33,7 +35,7 @@ class Game:
 
         self.helpmenu = tk.Menu(self.menu, tearoff=0)
         self.helpmenu.add_command(label="Controls")
-        self.helpmenu.add_command(label="Shortest Path",command= self.Map.shortest_path_flood)
+        self.helpmenu.add_command(label="Shortest Path",command= self.shortest_path_flood_fill)
         self.menu.add_cascade(label="Help", menu=self.helpmenu)
 
         self.setmap("")
@@ -88,6 +90,8 @@ class Game:
             self.images.append(
                 ImageTk.PhotoImage(Image.open(path).resize([self.Map.tile_size, self.Map.tile_size], Image.NEAREST)))
 
+        self.flooded_map = self.Map.map_flood_fill(self.Map.player.position,self.Map.goal)
+
         self.__rendermaze()
         self.userinput = True
         self.refreshmaplist()
@@ -132,6 +136,33 @@ class Game:
         print("win")
         self.userinput = False
         self.winlabel.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+
+    def shortest_path_flood_fill(self):
+        current_distance = self.flooded_map[self.Map.player.position.y][self.Map.player.position.x]
+        while self.Map.player.position is not self.Map.goal:
+            player_pos = self.Map.player.position
+            if player_pos.y + 1 < len(self.flooded_map) and self.flooded_map[player_pos.y + 1][player_pos.x] != -1 and self.flooded_map[player_pos.y + 1][player_pos.x] < current_distance:
+                current_distance = self.flooded_map[player_pos.y + 1][player_pos.x]
+                self.mov(Vec2d(0,1))
+                print("Down")
+            elif player_pos.y - 1 >= 0 and self.flooded_map[player_pos.y - 1][player_pos.x] != -1 and self.flooded_map[player_pos.y - 1][player_pos.x] < current_distance:
+                current_distance = self.flooded_map[player_pos.y - 1][player_pos.x]
+                self.mov(Vec2d(0,-1))
+                print("Up")
+            elif player_pos.x + 1 < len(self.flooded_map[player_pos.y]) and self.flooded_map[player_pos.y][player_pos.x + 1] != -1 and self.flooded_map[player_pos.y][player_pos.x + 1] < current_distance:
+                current_distance = self.flooded_map[player_pos.y][player_pos.x + 1]
+                self.mov(Vec2d(1,0))
+                print("Right")
+            elif player_pos.x - 1 >= 0 and self.flooded_map[player_pos.y][player_pos.x - 1] != -1 and self.flooded_map[player_pos.y][player_pos.x - 1] < current_distance:
+                current_distance = self.flooded_map[player_pos.y][player_pos.x - 1]
+                self.mov(Vec2d(-1,0))
+                print("Left")
+            else:
+                print("Break")
+                break
+            self.root.update()
+            #self.root.after(ms=1 ,func=self.shortest_path_flood_fill)
+            time.sleep(0.1)
 
     def mov(self, d):
         self.Map.move_player(d)

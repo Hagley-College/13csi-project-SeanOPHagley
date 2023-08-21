@@ -37,7 +37,8 @@ class Map():
             if len(row) > self.canvas_size[0]:
                 self.canvas_size[0] = len(row)*self.tile_size
 
-        self.len = Vec2d(0, len(self.map))
+        self.len = Vec2d(0,0)
+
 
         self.map = []
         i = 0
@@ -54,6 +55,7 @@ class Map():
                     self.len.x = len(row)
             i += 1
 
+        self.len.y = len(self.map)
 
         self.player = Player(Vec2d(self.map_json["player"]["x"],self.map_json["player"]["y"]),self.map_json["player"]["texture"])
 
@@ -133,50 +135,41 @@ class Map():
         while len(open_list) != 0:
             pass
 
-    def shortest_path_flood(self):
-        goalpos = self.goal
-        flooded_map = self.map_flood_fill(goalpos)
-
-        while self.player.position != goalpos:
-            time.sleep(1)
-            p_pos = self.player.position
-            p_value = flooded_map[p_pos.y][p_pos.x]
-            if p_value.y <= len(flooded_map) and p_value < flooded_map[p_pos.y + 1][p_pos.x]:
-                self.move_player(self,Vec2d(0,1))
-            elif p_value.y >= 0 and p_value < flooded_map[p_pos.y - 1][p_pos.x]:
-                self.move_player(self,Vec2d(0,-1))
-            elif p_value.x <= len(flooded_map[0]) and p_value < flooded_map[p_pos.y][p_pos.x + 1]:
-                self.move_player(self,Vec2d(1,0))
-            elif p_value.x >= 0 and p_value < flooded_map[p_pos.y][p_pos.x - 1]:
-                self.move_player(self,Vec2d(-1,0))
-
-
-    def map_flood_fill(self,origin):
-        print(self.len)
-        flooded_map = [[-1] * self.len.x] * self.len.y
-        print(flooded_map)
+    def map_flood_fill(self,origin,goal):
+        print("Origin: " + str(origin))
+        print("Goal: " + str(goal))
+        print("Len: " + str(self.len))
+        #flooded_map = [[-1] * self.len.x] * self.len.y
+        flooded_map = []
+        for y in range(self.len.y):
+            flooded_map.append([])
+            for x in range(self.len.x):
+                flooded_map[y].append(-1)
+        #print("Flooded map: " + str(flooded_map))
         neighbour_stack = []
 
-        neighbour_stack.append(origin)
+        neighbour_stack.append(goal)
 
-        distance_from_origin = 0
+        distance_from_goal = 0
 
         while neighbour_stack:
             new_neighbour_stack = []
             for pos in neighbour_stack:
-                if not self.query_tile_collision(pos) and flooded_map[pos.y][pos.x] == -1:
-                    flooded_map[pos.y][pos.x] = distance_from_origin
 
-                    new_neighbour_stack.append(pos + Vec2d(0,1))
-                    new_neighbour_stack.append(pos + Vec2d(0, -1))
+                if self.query_tile_collision(pos) is not True and flooded_map[pos.y][pos.x] == -1:
+                    #print(pos)
+                    #print(distance_from_goal)
+                    flooded_map[pos.y][pos.x] = distance_from_goal
+                    #print(flooded_map)
                     new_neighbour_stack.append(pos + Vec2d(1, 0))
                     new_neighbour_stack.append(pos + Vec2d(-1, 0))
-
-            distance_from_origin += 1
+                    new_neighbour_stack.append(pos + Vec2d(0, 1))
+                    new_neighbour_stack.append(pos + Vec2d(0, -1))
             neighbour_stack = new_neighbour_stack
-
+            distance_from_goal += 1
+        #flooded_map[2][2] = 69
+        print(flooded_map)
         return flooded_map
-
 
     def __repr__(self) -> str:
         s = ""
