@@ -1,6 +1,8 @@
 import os
 import time
 import tkinter as tk
+import tkinter.messagebox
+
 from PIL import Image, ImageTk
 
 from map import Map
@@ -34,7 +36,8 @@ class Game:
         self.menu.add_cascade(label="File", menu=self.filemenu)
 
         self.helpmenu = tk.Menu(self.menu, tearoff=0)
-        self.helpmenu.add_command(label="Controls")
+        self.helpmenu.add_command(label="Controls", command= lambda: tkinter.messagebox.showinfo(title="Controls",message="- Use arrow keys to move\n"))
+        self.helpmenu.add_command(label="Game", command=lambda: tkinter.messagebox.showinfo(title="Game",message="- To win you have to get to the goal.\n- To change mazes you can use the file menu -> load map."))
         self.helpmenu.add_command(label="Shortest Path",command= self.shortest_path_flood_fill)
         self.menu.add_cascade(label="Help", menu=self.helpmenu)
 
