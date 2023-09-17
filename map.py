@@ -17,7 +17,7 @@ class Map():
     def __init__(self,map_name) -> None:
         if map_name == "":
             map_name = "default"
-
+        #print(map_name)
         map_path = os.path.normpath(os.path.join(map_folder,os.path.normpath(map_name)))
         map_file_path = os.path.join(map_path,"map.json")
         map_file = open(map_file_path,"r")
@@ -136,9 +136,9 @@ class Map():
             pass
 
     def map_flood_fill(self,origin,goal):
-        print("Origin: " + str(origin))
-        print("Goal: " + str(goal))
-        print("Len: " + str(self.len))
+        #print("Origin: " + str(origin))
+        #print("Goal: " + str(goal))
+        #print("Len: " + str(self.len))
         #flooded_map = [[-1] * self.len.x] * self.len.y
         flooded_map = []
         for y in range(self.len.y):
@@ -168,7 +168,7 @@ class Map():
             neighbour_stack = new_neighbour_stack
             distance_from_goal += 1
         #flooded_map[2][2] = 69
-        print(flooded_map)
+        #print(flooded_map)
         return flooded_map
 
     def __repr__(self) -> str:

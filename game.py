@@ -65,9 +65,8 @@ class Game:
         for m in os.listdir("./maps/"):
             #print(m)
             if m != "default":
-                #print("m is not default, it's " + m + "!")
                 a = m
-                self.mapmenu.add_command(label=a, command=lambda: self.setmap(a))
+                self.mapmenu.add_command(label=a, command=lambda a=a: self.setmap(a))
         #self.filemenu.add_cascade(label="Load Map", menu=self.mapmenu)
 
     def setmap(self, mapname) -> None:
@@ -136,7 +135,7 @@ class Game:
                            )
 
     def win(self):
-        print("win")
+        #print("win")
         self.userinput = False
         self.winlabel.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
@@ -147,21 +146,21 @@ class Game:
             if player_pos.y + 1 < len(self.flooded_map) and self.flooded_map[player_pos.y + 1][player_pos.x] != -1 and self.flooded_map[player_pos.y + 1][player_pos.x] < current_distance:
                 current_distance = self.flooded_map[player_pos.y + 1][player_pos.x]
                 self.mov(Vec2d(0,1))
-                print("Down")
+                #print("Down")
             elif player_pos.y - 1 >= 0 and self.flooded_map[player_pos.y - 1][player_pos.x] != -1 and self.flooded_map[player_pos.y - 1][player_pos.x] < current_distance:
                 current_distance = self.flooded_map[player_pos.y - 1][player_pos.x]
                 self.mov(Vec2d(0,-1))
-                print("Up")
+                #print("Up")
             elif player_pos.x + 1 < len(self.flooded_map[player_pos.y]) and self.flooded_map[player_pos.y][player_pos.x + 1] != -1 and self.flooded_map[player_pos.y][player_pos.x + 1] < current_distance:
                 current_distance = self.flooded_map[player_pos.y][player_pos.x + 1]
                 self.mov(Vec2d(1,0))
-                print("Right")
+                #print("Right")
             elif player_pos.x - 1 >= 0 and self.flooded_map[player_pos.y][player_pos.x - 1] != -1 and self.flooded_map[player_pos.y][player_pos.x - 1] < current_distance:
                 current_distance = self.flooded_map[player_pos.y][player_pos.x - 1]
                 self.mov(Vec2d(-1,0))
-                print("Left")
+                #print("Left")
             else:
-                print("Break")
+                #print("Break")
                 break
             self.root.update()
             #self.root.after(ms=1 ,func=self.shortest_path_flood_fill)

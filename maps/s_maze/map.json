@@ -1,0 +1,101 @@
+{
+    "tile_size": 48,
+    "texture_paths": [
+        "textures/floor.png",
+        "textures/wall.png",
+        "textures/player.png"
+    ],
+    "player": {
+        "x": 1,
+        "y": 0,
+        "texture": 2
+    },
+
+    "goal": {"x":  1, "y":  3},
+    "map": [
+        [
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ]
+        ],
+        [
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ]
+        ],
+        [
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ]
+        ],
+        [
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ]
+        ]
+    ]
+}
