@@ -1,0 +1,23 @@
+.player {
+(textures/player.png);
+}
+
+
+.data {
+[+]("textures/floor.png"){SPAWN};
+[_]("textures/floor.png");
+[#]("textures/wall.png"){COLLIDE};
+[@]("textures/floor.png"+"textures/goal.png"){GOAL};
+}
+
+
+.maze {
+##########_#
+#__________#
+#_####_#####
+#__________#
+##########_#
+#__________#
+#@##########
+}
+
