@@ -18,6 +18,6 @@ from game import Game
 # f.write(json.dumps(j, indent=4))
 # f.close()
 m = Game()
-m.setmap("badmap")
+m.setmap("big")
 #m.mapmenu.delete(0,"end")
 m.run()

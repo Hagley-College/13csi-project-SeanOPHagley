@@ -1,11 +1,12 @@
 {
     "tile_size": 48,
     "texture_paths": [
-        "textures/default-floor.png",
-        "textures/default-wall.png",
-        "textures/Untitled.png",
-        "textures/Dungeon_tile.png",
+        "textures/carpet.png",
+        "textures/wall3.png",
+        "textures/goal.png",
+        "textures/carpet.png",
         "textures/player.png"
+
     ],
     "player": {
         "x": 1,
@@ -17,7 +18,7 @@
     "map": [
         [
             [
-                {"texture": 3,
+                {"texture": 1,
                 "collisions": true}
             ],
             [
@@ -25,12 +26,27 @@
                 "collisions": false}
             ],
             [
-                {"texture": 3,
-                "collisions": true}, {"texture": 4,
+                {"texture": 1,
                 "collisions": true}
             ],
             [
-                {"texture": 3,
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 1,
                 "collisions": true}
             ]
         ],
@@ -50,9 +66,41 @@
             [
                 {"texture": 1,
                 "collisions": true}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
             ]
         ],
         [
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
             [
                 {"texture": 1,
                 "collisions": true}
@@ -77,6 +125,23 @@
             ],
             [
                 {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false},{"texture": 2,
                 "collisions": false}
             ],
             [
