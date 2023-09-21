@@ -64,6 +64,28 @@
                 "collisions": false}
             ],
             [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ]
+        ],
+        [
+            [
                 {"texture": 1,
                 "collisions": true}
             ],
@@ -74,6 +96,52 @@
             [
                 {"texture": 0,
                 "collisions": false}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ]
+        ],
+        [
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 0,
+                "collisions": false}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
+            ],
+            [
+                {"texture": 1,
+                "collisions": true}
             ],
             [
                 {"texture": 0,
